@@ -1,0 +1,179 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage{biblatex} 
+
+\title{Study of liquid brines on martial slopes}
+\author{Khalid Koumila}
+\date{}
+\addbibresource{sample.bib} %Imports bibliography file
+
+\begin{document}
+
+\maketitle
+\tableofcontents 
+
+\newpage
+\section*{Introduction}
+The subject of water on Mars is controversial and remains a primary subject for the studies on the planet. 
+
+Whereas there are proofs of ancient water present on Mars, whether it be by orbital observation or direct Rover exploration, little is known about present-day hydrology or lack thereof. 
+
+Understanding the processes that drive the climate of Mars is necessary to understand our own climatology, as well as potential prospects for life.
+
+Remote observations are the primary source of the processes that occur on the surface of the planet, and gives us insights on what is the structure and evolution of the interior.
+
+In order for these observations to be interpreted, a certain theoretical work is needed to discriminate between competing theories that explain the same phenomenon.
+In particular, recurring slope lineae are dark streaks recently observed by Mars Reconnaissance Orbiter (MRO) on the slopes of Mars. Their characteristics (location and orientation, seasonality) are compelling in the sense that they point to a liquid triggered event. 
+
+In this work a model of temperature evolution will be set up in order to determine the possibility of the melting of subsurface ice. The investigation relies on the thermal study on the slope, taking into account the angle of the Sun and relevant variables.
+
+\chapter{Background}
+To understand the context in which this question arises, an overview of the current knowledge and exploration of Mars is given here.
+\section{Exploration of Mars.} 
+The planet is known since the antiquity, and subsequent observations yielded the existence of \textit{canali}, from Giovanni Schiaparelli, and subsequent theories about their artificial origins.
+
+The distance to the Earth and poor quality of the instruments didn't allow a real investigation of present-day processes on Mars before the first orbiters and landers. The Soviet Marsnik and American Mariner spacecrafts were launched in the 1960's, with the first successes being Mariner 4 and Marsnik 5 in 1965 and 1974 respectively. 
+The Vikings landers gave one of the first images from the surface of Mars from 1975 until the 1980's.
+
+Mars Global Surveyor, launched in 1996, marked a new beginning in the exploration of Mars, closely followed by the rover Pathfinder and Mars Odyssey in 2001.
+The orbiter that interests us is Mars Reconnaissance Orbiter, equipped with a high-resolution camera, HiRISE, that have a resolution of the order of 30 cm/pixel. 
+This is the highest resolution yet achieved, and was instrumental in detecting and observing recurring slope lineae.
+
+Improved technology and sensors are shipped with each generation of spacecrafts, the most recent being the lander InSight.
+
+\section{Marian geology and climate}
+Observation of the surface may be done by orbiting spacecrafts. The landforms observed indicate the processes that occurred on the planet at earlier times. The signs attest of the rich past of the interior, including volcanism, magnetic fields, tectonism and glaciers.
+
+The primary feature of the surface of the planet is the hemispheric dichotomy. 
+The Northern Hemisphere has a lower elevation and smoother surface than the Southern Hemisphere, which is older and show signs of craterization dating to the Late Heavy Bombardment.
+
+Signs of ancient water presence are shown in erosion patterns, including the Valles Marineris, outflow channels and chaotic terrains. The presence of hydrated minerals is also documented by spectrometry and direct observation. 
+
+Present water occurrence on Mars is limited to drops at the location of Phoenix lander.
+
+Despite having a tenuous atmosphere (600 Pa) and no current magnetic field, Mars has a climate, in the sense of a general circulation, polar ice caps, and weather patterns due to the seasons. 
+The eccentricity of Mars (0.0934) is greater than the Earth's (0.016), that has big impact on the duration of seasons and variations on solar insolation. 
+
+\section{Description of the phenomena, characteristics, features.}
+The observation of Recurring Slope Lineae (RSL) follows certain patterns that are detailed in this section.
+
+They are observed in the intermediate southern latitudes - around 40 degrees on slopes, as well as near the equator (Gale crater). 
+
+Their presence is documented only on equator-facing slopes. The south hemisphere being heavily craterized, one can expect the existence of slopes of all azimuths being represented. This piece of information points to a seminal role of the sun and direct solar rays input. 
+
+The surface darkening is the first marker of the event, extending downslope. The origin of the albedo change is thought to be due to a rearrangement of the soil grains, after mixing with salty water or granular flow.  
+
+Their lengths is of tens of meters with only tens of centimenters in width. They can only be resolved by high-resolution imaging systems such as HiRISE. 
+
+They exhibit a seasonality, being only formed during local spring or summer, and vanishing towards the winter.
+The orientation of the portion of the slope in which they occur is also determined to be preferentially toward the equator. 
+The advance of the flow has higher rates at the beginning of the season.
+
+\section{Previous works}
+
+Since their first observations in 2008, many works were done investigating the origin of Recurring Slope Lineae.
+We find traces of perchlorate at Pheonix landing site and remote sensing evidence of their presence on the site of known RSL, E. K. Leask et al. (2018) pointed a glitch in the post-acquisition treatment that resulted in an artifact that mimics the signature of various salts including perchlorates. Some Perchlorate reported location cannot be considered robust observations.  
+If Chevrier (2012) investigates the temperature necessary for a melting of brines, based on a subsurface ice model adapted from Aharonson (2006), there have been critics of the liquid flow, e.g. McEwen (2018) that is a proponent of the granular flow theory. Stillman (2018) distinguish the cases of wet-dominated flow, wet-triggered flow and dry granular flow, concluding that no mechanism can be the sole origin of the process. 
+As for specifically northern latitude RSLs that have different characteristics, Stillman (2016) suggests a strong link with a briny aquifer.  
+
+All papers concur that new data and enhanced models must be combined to describe accurately the observations. 
+
+\chapter{Model}
+THe model used is a combinaison of a 1-D thermal model for planetary surface, and various hypothesis done about the composition and structure of the soil, based on available information, observation and study of martian soil analogs. 
+
+\section{1-D thermal model}
+The source code is adapted from the work of Schorghofer (2015), written in fortran language. 
+It describes the energy balance equation for the surface, as the following :
+\[\rho c \frac{dT}{dt}=k\frac{d^2 T}{dz^2}\]
+
+    \subsection{Boundary conditions}
+It is solved with a semi-implicit Crank-Nicholson scheme with the addition of the upper boundary condition: 
+\[Q + k \frac{dT}{dz} = \epsilon \sigma T^4\] 
+
+    
+    \subsection{Scheme}
+The Crank-Nicholson scheme is used :
+\[ blah \]
+
+The depth chosen is 9 m, which is well below the annual skin depth, defined as the depth at which the annual amplitude of temperature is divided by a factor $e$, and found to be around 3 m. As such we insure a comprehensive portrait of the in-depth temperature profile. The timescale studied here doesn't go as far as a year.
+
+Time steps are taken to be half a martian hour (1849 seconds) and regular. The space steps are irregular to save computing time and memory, and depth layers rise with depth. We take 30 layers distributed as follows. 
+
+The convergence is guaranteed if time steps and space steps meet : \[\frac{k dt}{c\rho dz^2}<=0.25\] 
+
+At the bottom layer, we include areothermal energy coming from the core. Estimates range from 19 mW/m$^2$ to 30 mW/m$^2$, given the uncertainties and the challenges in observations.
+
+    \subsection{implementation of slopes}
+    When considering topography the energy balance is adapted by the following :
+    \begin{itemize}
+        \item incidence angle of solar light over the sloped terrain changes from $\cos{\zeta} $ to $$\cos{ \zeta_s} = \cos{ \alpha} \cos{ \zeta} - \sin{ \alpha} \sin{zeta}\cos{\Delta a}$$
+        with $\Delta a$ the difference in azimuth between the gradient slope of angle $\alpha$ and the sun. 
+        \item reevaluation of the atmospheric fluxes from sources on the field of view of the slope, i.e. a factor $\cos^2{\alpha/2}$ due to the reduced solid angle of atmosphere over the slope.  
+        \item longwave emission due self-heating of the surrounding flat terrain 
+       \[Q_{land} = \epsilon \sigma T_{land}^2\sin{\alpha/2}\]
+    \end{itemize}{}
+
+\section{Thermal properties}
+    \subsection{}
+    Inertia maps given by (Putzig 2007) are measures of thermal properties mapped over the surface of Mars. Taken from TES aboard the orbiter Mars Global Surveyor, it gives a large-scale distribution of thermal inertia. 
+    Focusing over the regions we are interested in, namely the Newton Crater and the Gale Crater, we can take the thermal inertia to be 200-300 t.u.i, or J m-2 K-1 s-1/2. 
+    Thermal inertia is given by $\sqrt{k\rho c}$ with conductivity and heat capacity. 
+    \subsection{}
+    Observation of thermal inertia doesn't allow distinguishing individual values of $k$, $\rho$ and $c$. The TCEP measurements made by Phoenix in 2008 gives individual values for $k$ and $c$. 
+    The baseline value of $k$ given by TECP is .08 WK-1m-1. 
+    Having a fixed value of the volumetric heat capacity $\rho c$ at $1.05 10^6$ J m-3 K-1 , the range in thermal inertia for mid-latitudes yields a range in conductivity from 0.01 WK-1m-1 to .015 WK-1m-1, spanning an order of magnitude.
+    The increase of conductivity with respect to increasing temperature is explained by the heat capacity changes. It is due to phonons propagation and linked to the increase in their mean free path. 
+    
+    \subsection{}
+    These measurements are based on surface and sub-surface measurement of regolith properties. InSight is a lander which one of the aims is measuring the behaviour of the regolith at depth. Results are expected to enrich the knowledge about depth temperature and properties, including the depth of the ice table and heat flow data. 
+
+\section{Layers of the soil}
+    \subsection{}
+    Direct global measurement of the subsurface (deeper than the first centimeters) being not yet achieved, subsurface ice has been studied using diffusive models of H20 evolution in the long term and global scale. Here it is assumed that the subsurface ice is shallow at mid-latitudes, the icetable to be the order of tens of cm deep. The ice presence at the surface is thought to be deeper than two meters. 
+    These are baseline numbers, as models are being formulated that suggest persistence of shallow ice in porous interstices, notably in equatorial regions.
+    
+    \subsection{}
+    The thermal properties of an ice cemented soil are the combination of thermal properties of dry soil and ice, under the assumption that ice is distributed evenly in the soil following Schorghofer and Aaronson. 
+    \[k = k_{soil} + \phi k_{ice}-\],
+    and the same combination is done with $\rho c$, where $\phi = 0.4$ is the porosity, which stems from study of analogs. $f_i$ ice the ice-fraction of ice in the voids. In Martian thermal and pressure conditions, the ice I values for $k_{ice}=3.2WK-1m-1 $, $c_{ice} = 1540 J kg-1K-1$ $\rho _{ice}=927 kg m-3$ are taken.
+    
+\section{Brines}
+    Brines are high-concentration solution of salt in water. The presence of perchlorates on the surface of Mars and particularly at locations to recurring slope lineae is documented. The most widely found cations are magnesium and sodium.
+    Other salts have been observed (chlorates, chlorides, sulfates...)
+    We will thus concentrate on these two salts. 
+    The main purpose of the salts is lowering the fusion point of the water. It would allow subsurface ice to melt when the temperature is not low enough for pure water to melt. The phase diagrams for magnesium and sodium perchlorate are thus. 
+    
+    The eutectic composition is the concentration at which the fusion point is the lowest (eutectic temperature). This is for the specific concentration of []wt\% for magnesium perchlorate, resulting in a temperature of 206 K, and []wt\% for sodium perchlorates, yielding a fusion point at 239K. 
+    The specific concentration of these salts in the water is not yet know, we will then consider a wide range of concentrations from 5 to 20 \%.   
+    
+\chapter{Results}
+To understand the role of the slope orientation and steepness, a diagram shows the average maximum and minimum temperature at the latitudes of two craters, Gale crater (-5), and Newton crater (-41), where RSLs were documented.
+Positive slope index is a slope facing the equator and negative slope is a pole-facing gradient.
+The plot validates the model as it replicates successfully the graph from Chevrier (2012). 
+
+If the presence of dry ice is implemented in the thermal model, the frozen ground has a temperature of 148 K. This type of ice can appear on slope that are facing the poles on slopes over 8 degrees. The ice remains present over a period of several days around the local winter solstice.
+
+Maximum, minimum and daily average temperatures on a flat terrain  are compared with sloped surfaces. The slope steepness is 35 for the Newton Crater and 15 for the Gale crater. 
+
+The relative importance of energy sources by martian hour
+
+
+As the conductivity can span over an order of magnitude, the influence of such changes can determine the sensitivity of the model to this input variable.
+
+Hourly temperature diagram gives the temperature for each hour of the martian day. 
+
+A temperature profile documents the behaviour of temperature with respect to the depth -- here until [] meters at different times of year. 
+Modelling a temperature-dependant conductivity or a conductivity rising with depth. 
+
+\chapter{Discussion}
+
+\section*{Conclusion}
+
+\printbibliography 
+
+\end{document}
