@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{gensymb}
 \usepackage{hyperref}
 \usepackage{amsfonts}
 \usepackage{biblatex} 
@@ -60,7 +61,7 @@ Despite having a tenuous atmosphere (600 Pa) and no current magnetic field, Mars
 The eccentricity of Mars (0.0934) is greater than the Earth's (0.016), that has big impact on the duration of seasons and variations on solar insolation. 
 
 \section{Description of the phenomena, characteristics, features.}
-The observation of Recurring Slope Lineae (RSL) follows certain patterns that are detailed in this section.
+The observation of Recurring Slope Lineae (or RSL) follows certain patterns that are detailed in this section.
 
 They are observed in the intermediate southern latitudes - around 40 degrees on slopes, as well as near the equator (Gale crater). 
 
@@ -79,12 +80,12 @@ The advance of the flow has higher rates at the beginning of the season.
 Since their first observations in 2008, many works were done investigating the origin of Recurring Slope Lineae.
 We find traces of perchlorate at Pheonix landing site and remote sensing evidence of their presence on the site of known RSL, E. K. Leask et al. (2018) pointed a glitch in the post-acquisition treatment that resulted in an artifact that mimics the signature of various salts including perchlorates. Some Perchlorate reported location cannot be considered robust observations.  
 If Chevrier (2012) investigates the temperature necessary for a melting of brines, based on a subsurface ice model adapted from Aharonson (2006), there have been critics of the liquid flow, e.g. McEwen (2018) that is a proponent of the granular flow theory. Stillman (2018) distinguish the cases of wet-dominated flow, wet-triggered flow and dry granular flow, concluding that no mechanism can be the sole origin of the process. 
-As for specifically northern latitude RSLs that have different characteristics, Stillman (2016) suggests a strong link with a briny aquifer.  
+As for northern latitude RSLs, that have different characteristics, Stillman (2016) suggests a strong link with a briny aquifer.  
 
 All papers concur that new data and enhanced models must be combined to describe accurately the observations. 
 
 \chapter{Model}
-THe model used is a combinaison of a 1-D thermal model for planetary surface, and various hypothesis done about the composition and structure of the soil, based on available information, observation and study of martian soil analogs. 
+The model used is a combination of a 1-D thermal model for planetary surface, and various hypothesis done about the composition and structure of the soil, based on available information, observation and study of martian soil analogues. 
 
 \section{1-D thermal model}
 The source code is adapted from the work of Schorghofer (2015), written in fortran language. 
@@ -95,6 +96,10 @@ It describes the energy balance equation for the surface, as the following :
 It is solved with a semi-implicit Crank-Nicholson scheme with the addition of the upper boundary condition: 
 \[Q + k \frac{dT}{dz} = \epsilon \sigma T^4\] 
 
+The Q is itself a combination of direct sunlight input, scattered solar rays in the atmosphere coming from the whole half-sphere, and contribution due to IR emission of the atmospheres. These as defined as 
+\[Q_{sun} = \]
+\[Q_{scat} = \]
+\[Q_{IR} = \]
     
     \subsection{Scheme}
 The Crank-Nicholson scheme is used :
@@ -115,18 +120,18 @@ At the bottom layer, we include areothermal energy coming from the core. Estimat
         with $\Delta a$ the difference in azimuth between the gradient slope of angle $\alpha$ and the sun. 
         \item reevaluation of the atmospheric fluxes from sources on the field of view of the slope, i.e. a factor $\cos^2{\alpha/2}$ due to the reduced solid angle of atmosphere over the slope.  
         \item longwave emission due self-heating of the surrounding flat terrain 
-       \[Q_{land} = \epsilon \sigma T_{land}^2\sin{\alpha/2}\]
+       \[Q_{land} = \epsilon \sigma T_{land}^4\sin{\alpha/2}\]
     \end{itemize}{}
 
 \section{Thermal properties}
     \subsection{}
     Inertia maps given by (Putzig 2007) are measures of thermal properties mapped over the surface of Mars. Taken from TES aboard the orbiter Mars Global Surveyor, it gives a large-scale distribution of thermal inertia. 
-    Focusing over the regions we are interested in, namely the Newton Crater and the Gale Crater, we can take the thermal inertia to be 200-300 t.u.i, or J m-2 K-1 s-1/2. 
+    Focusing over the regions we are interested in, namely the Newton Crater and the Gale Crater, we can take the thermal inertia to be 200-300 J m-2 K-1 s-1/2 or t.u.i. 
     Thermal inertia is given by $\sqrt{k\rho c}$ with conductivity and heat capacity. 
     \subsection{}
     Observation of thermal inertia doesn't allow distinguishing individual values of $k$, $\rho$ and $c$. The TCEP measurements made by Phoenix in 2008 gives individual values for $k$ and $c$. 
-    The baseline value of $k$ given by TECP is .08 WK-1m-1. 
-    Having a fixed value of the volumetric heat capacity $\rho c$ at $1.05 10^6$ J m-3 K-1 , the range in thermal inertia for mid-latitudes yields a range in conductivity from 0.01 WK-1m-1 to .015 WK-1m-1, spanning an order of magnitude.
+    The baseline value of $k$ given by TECP is $0.085$ WK-1m-1. 
+    Having a fixed value of the volumetric heat capacity $\rho c$ at $1.05 10^6$ J m-3 K-1 , the range in thermal inertia for mid-latitudes yields a range in conductivity from $0.01$ WK-1m-1 (corresponding to 200 t.u.i) to $.15$ WK-1m-1 (corresponding to 400 t.u.i), spanning an order of magnitude.
     The increase of conductivity with respect to increasing temperature is explained by the heat capacity changes. It is due to phonons propagation and linked to the increase in their mean free path. 
     
     \subsection{}
@@ -134,13 +139,13 @@ At the bottom layer, we include areothermal energy coming from the core. Estimat
 
 \section{Layers of the soil}
     \subsection{}
-    Direct global measurement of the subsurface (deeper than the first centimeters) being not yet achieved, subsurface ice has been studied using diffusive models of H20 evolution in the long term and global scale. Here it is assumed that the subsurface ice is shallow at mid-latitudes, the icetable to be the order of tens of cm deep. The ice presence at the surface is thought to be deeper than two meters. 
+    Direct global measurement of the subsurface (deeper than the first centimetres) being not yet achieved, subsurface ice has been studied using diffusive models of H20 evolution in the long term and global scale. Here it is assumed that the subsurface ice is shallow at mid-latitudes, the icetable to be the order of tens of cm deep. The ice presence at the surface is thought to be deeper than two meters. 
     These are baseline numbers, as models are being formulated that suggest persistence of shallow ice in porous interstices, notably in equatorial regions.
     
     \subsection{}
     The thermal properties of an ice cemented soil are the combination of thermal properties of dry soil and ice, under the assumption that ice is distributed evenly in the soil following Schorghofer and Aaronson. 
     \[k = k_{soil} + \phi k_{ice}-\],
-    and the same combination is done with $\rho c$, where $\phi = 0.4$ is the porosity, which stems from study of analogs. $f_i$ ice the ice-fraction of ice in the voids. In Martian thermal and pressure conditions, the ice I values for $k_{ice}=3.2WK-1m-1 $, $c_{ice} = 1540 J kg-1K-1$ $\rho _{ice}=927 kg m-3$ are taken.
+    and the same combination is done with $\rho c$, where $\phi = 0.4$ is the porosity, which stems from study of soil analogs. $f_i$ ice the ice-fraction of ice in the voids. In Martian thermal and pressure conditions, the ice I values for $k_{ice}=3.2WK-1m-1 $, $c_{ice} = 1540 J kg-1K-1$ $\rho _{ice}=927 kg m-3$ are taken.
     
 \section{Brines}
     Brines are high-concentration solution of salt in water. The presence of perchlorates on the surface of Mars and particularly at locations to recurring slope lineae is documented. The most widely found cations are magnesium and sodium.
@@ -148,27 +153,103 @@ At the bottom layer, we include areothermal energy coming from the core. Estimat
     We will thus concentrate on these two salts. 
     The main purpose of the salts is lowering the fusion point of the water. It would allow subsurface ice to melt when the temperature is not low enough for pure water to melt. The phase diagrams for magnesium and sodium perchlorate are thus. 
     
-    The eutectic composition is the concentration at which the fusion point is the lowest (eutectic temperature). This is for the specific concentration of []wt\% for magnesium perchlorate, resulting in a temperature of 206 K, and []wt\% for sodium perchlorates, yielding a fusion point at 239K. 
-    The specific concentration of these salts in the water is not yet know, we will then consider a wide range of concentrations from 5 to 20 \%.   
+    The eutectic composition is the concentration at which the fusion point is the lowest (eutectic temperature). This is for the specific concentration of 44wt\% for magnesium perchlorate, resulting in a temperature of 206 K, and 52wt\% for sodium perchlorates, yielding a fusion point at 236K. 
+    The specific concentration of these salts in the water is not yet know, we will then consider a wide range of concentrations. The freezing temperatures with respect to the concentration are on the following table.
+    
+    \begin{center}
+
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+     Salt/concentration & 5 \% & 20 \% & 35 \%\\
+     NaClO$_4$ & 272 K & 266 K & 257 K \\
+     MgClO$_4$ & 270 K & 264 K & 243 K \\
+    \hline
+    \end{tabular}{}
+    \end{center}
+
     
 \chapter{Results}
-To understand the role of the slope orientation and steepness, a diagram shows the average maximum and minimum temperature at the latitudes of two craters, Gale crater (-5), and Newton crater (-41), where RSLs were documented.
+To understand the role of the slope orientation and steepness, figure \ref{fig:tvslopenewton} shows the annual average maximum and minimum temperature at the latitudes of two craters, Gale crater (-5), and Newton crater (-41), where RSLs were documented, for a continuous range of slopes.
 Positive slope index is a slope facing the equator and negative slope is a pole-facing gradient.
-The plot validates the model as it replicates successfully the graph from Chevrier (2012). 
+The plot validates the model as it replicates successfully the graph from Chevrier (2012). \\
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-newton-tvslope.png}
+    \caption{Average maximum (red line) and average minimum (blue line) surface temperatures at the latitude of Newton Crater by slope.}
+    \label{fig:tvslopenewton}
+\end{figure}{}
 
-If the presence of dry ice is implemented in the thermal model, the frozen ground has a temperature of 148 K. This type of ice can appear on slope that are facing the poles on slopes over 8 degrees. The ice remains present over a period of several days around the local winter solstice.
+If the presence of dry ice is implemented in the thermal model, the frozen ground has a temperature of 148 K. This type of ice can appear on slope that are facing the poles on slopes over 11 degrees. The ice remains present over a period of several days around the local winter solstice. This causes the apparent discontinuity that can be seen on figure \ref{fig:tvslopenewton}. 
 
-Maximum, minimum and daily average temperatures on a flat terrain  are compared with sloped surfaces. The slope steepness is 35 for the Newton Crater and 15 for the Gale crater. 
+Temperatures on the slopes around the equator are much more stable (figure \ref{tvslopegale}) and have a maximum around a 12 degrees equator facing slope.\\ 
 
-The relative importance of energy sources by martian hour
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-gale-tvslope.png}
+    \caption{Average maximum (red line) and average minimum (blue line) surface temperatures at the latitude of Gale Crater (near the equator) by slope.}
+    \label{tvslopegale}
+\end{figure}{}
 
+Maximum, minimum and daily average temperatures on a flat terrain are compared with sloped surfaces. The slope steepness will be hereafter 35 degrees for the Newton Crater and 15 degrees for the Gale crater.  \\
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-newton-tempannu-flat.png}
+    \caption{Maximum (red line), minimum (blue line), daily average (green line) surface temperatures for a flat terrain (dashed lines) and 35 \degree slope facing the equator (solid line)}
+    \label{tempannunewton}
+\end{figure}{}
 
-As the conductivity can span over an order of magnitude, the influence of such changes can determine the sensitivity of the model to this input variable.
+Temperature on the slopes are generally higher than on a flat soil (figure \ref{tempannunewton}) on Newton crater, on a equator facing slope, with a lower seasonal variability. The local summer is at 270\degree of solar longitude. Nighttime temperatures all year round are around 190 K due to the relatively low thermal inertia and absence of a strong atmosphere. \\
 
-Hourly temperature diagram gives the temperature for each hour of the martian day. 
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-gale-tempannu-flat.png}
+    \caption{Maximum (red line), minimum (blue line), daily average (green line) surface temperatures for a flat terrain (dashed lines) and 15 \degree slope facing the equator (solid line)}
+    \label{tempannugale}
+\end{figure}{}
+The low latitude lead to weaker seasonal variations (figure \ref{tempannugale}), where the same smoothing effect of the slope is observed. Note that the slope is much lower than figure \ref{tempannunewton}. \\
 
-A temperature profile documents the behaviour of temperature with respect to the depth -- here until [] meters at different times of year. 
-Modelling a temperature-dependant conductivity or a conductivity rising with depth. 
+When the sun is up, more than 90 \% of the incoming energy comes from sunlight (figure \ref{qpropnewton}), and a negligible fraction spans from surrounding land and the atmosphere. The contribution resulting from heating of the atmosphere is considered constant during all martian day (as in Schorghofer) and is the leading nighttime term. The land contribution contributes up to 40 \% contribution to the heat flux just after sunset. As this radiative flux contribution linked to the temperature of the surface, it peaks at noon and is minimal just before sunrise (figure \ref{qnewton}. \\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-newton-q-prop.png}
+    \caption{Proportion of fluxes}
+    \label{qpropnewton}
+\end{figure}{}
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{graphs/0108-newton-q.png}
+    \caption{Incoming fluxes (log scale), in summer, on Newter Crater}
+    \label{qnewton}
+\end{figure}{}
+
+As the conductivity can span over an order of magnitude, the influence of such changes determine the sensitivity of the model to this input variable (figure \ref{diffknewton}). The values are 0.015WK-1m-1 for the dashed lines, 0.15WK-1m-1  for the dotted lines, and 0.085WK-1m-1 for solid lines. The most important difference is a lower overall minimum temperature for a low thermal conductivity. \\
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphs/0108-newton-diffk.png}
+    \caption{Maximum (red line), minimum (blue line), daily average (green line) surface temperatures for different values of thermal conductivity}
+    \label{diffknewton}
+\end{figure}{}
+
+The temperature evolves through the martian day heavily, from 200 K to 310 K on the warmest day of the year (figure \ref{hourlynewton}). Midday is the hottest hour of the day, with temperature only slightly decreasing through the afternoon and a minimum before sunrise. On the coldest day, the same trend is followed though the temperatures are much lower (40 K difference at the most). \\
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphs/0108-newton-hourly.png}
+    \caption{Surface temperature on the warmest day (red) and coldest (blue) day of the year, on a 35 \degree slope}
+    \label{hourlynewton}
+\end{figure}{}
+
+Near the equator, seasonal variations are much lower (figure \ref{hourlygale}), with a maximal temperature difference not exceeding 20 K. \\
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{graphs/0108-gale-hourly.png}
+    \caption{Surface temperature on the warmest day (red) and coldest (blue) day of the year, on a 15 \degree slope}
+    \label{hourlygale}
+\end{figure}{}
+
+A temperature profile documents the behaviour of temperature with respect to the depth -- here up to [] meters at different times of year. 
+Modelling a temperature-dependant conductivity or a conductivity rising with depth. \\
 
 \chapter{Discussion}
 
