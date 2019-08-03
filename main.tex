@@ -63,13 +63,13 @@ The eccentricity of Mars (0.0934) is greater than the Earth's (0.016), that has 
 \section{Description of the phenomena, characteristics, features.}
 The observation of Recurring Slope Lineae (or RSL) follows certain patterns that are detailed in this section.
 
-They are observed in the intermediate southern latitudes - around 40 degrees on slopes, as well as near the equator (Gale crater). 
+They are observed in the intermediate southern latitudes - around 40 \degree of latitude on slopes greater than 30 \degree, as well as near the equator (RSL candidates at Gale crater). 
 
-Their presence is documented only on equator-facing slopes. The south hemisphere being heavily craterized, one can expect the existence of slopes of all azimuths being represented. This piece of information points to a seminal role of the sun and direct solar rays input. 
+Their presence is documented quasi exclusively on equator-facing slopes, sometimes west- or east- facing slopes, and exceptionally on polar facing slopes (as in Horowitz Crater, -32 \degree south). The south hemisphere being heavily craterized, one can expect the existence of slopes of all azimuths being represented. This piece of information points to a seminal role of the sun and direct solar rays input. 
 
 The surface darkening is the first marker of the event, extending downslope. The origin of the albedo change is thought to be due to a rearrangement of the soil grains, after mixing with salty water or granular flow.  
 
-Their lengths is of tens of meters with only tens of centimenters in width. They can only be resolved by high-resolution imaging systems such as HiRISE. 
+Their lengths is of tens of meters with only tens of centimetres in width. They can only be resolved by high-resolution imaging systems such as HiRISE. 
 
 They exhibit a seasonality, being only formed during local spring or summer, and vanishing towards the winter.
 The orientation of the portion of the slope in which they occur is also determined to be preferentially toward the equator. 
@@ -78,9 +78,9 @@ The advance of the flow has higher rates at the beginning of the season.
 \section{Previous works}
 
 Since their first observations in 2008, many works were done investigating the origin of Recurring Slope Lineae.
-We find traces of perchlorate at Pheonix landing site and remote sensing evidence of their presence on the site of known RSL, E. K. Leask et al. (2018) pointed a glitch in the post-acquisition treatment that resulted in an artifact that mimics the signature of various salts including perchlorates. Some Perchlorate reported location cannot be considered robust observations.  
+We find traces of perchlorate at Pheonix landing site and remote sensing evidence of their presence on the site of known RSL, E. K. Leask et al. (2018) pointed a glitch in the post-acquisition treatment that resulted in artefacts that mimics the signature of various salts including perchlorates. Some Perchlorate reported location cannot be considered robust observations.  
 If Chevrier (2012) investigates the temperature necessary for a melting of brines, based on a subsurface ice model adapted from Aharonson (2006), there have been critics of the liquid flow, e.g. McEwen (2018) that is a proponent of the granular flow theory. Stillman (2018) distinguish the cases of wet-dominated flow, wet-triggered flow and dry granular flow, concluding that no mechanism can be the sole origin of the process. 
-As for northern latitude RSLs, that have different characteristics, Stillman (2016) suggests a strong link with a briny aquifer.  
+As for near-equator RSLs, that have different characteristics, Stillman (2016) suggests a strong link with a briny aquifer upwelling.  
 
 All papers concur that new data and enhanced models must be combined to describe accurately the observations. 
 
@@ -96,20 +96,27 @@ It describes the energy balance equation for the surface, as the following :
 It is solved with a semi-implicit Crank-Nicholson scheme with the addition of the upper boundary condition: 
 \[Q + k \frac{dT}{dz} = \epsilon \sigma T^4\] 
 
-The Q is itself a combination of direct sunlight input, scattered solar rays in the atmosphere coming from the whole half-sphere, and contribution due to IR emission of the atmospheres. These as defined as 
-\[Q_{sun} = \]
-\[Q_{scat} = \]
-\[Q_{IR} = \]
+The Q is itself a combination of direct sunlight input, scattered solar rays in the atmosphere coming from the whole half-sphere, and contribution due to IR emission of the atmospheres. These as defined with the help of the solar zenith angleat each time step  $\zeta$ and at noon $\zeta_{noon}$.
+\[Q_{sun} = S_{mean}*\cos(\zeta)*(1-albedo) \]
+\[Q_{scat} = f_{IR}*S_{mean} *\cos(\zeta_{noon}) \]
+\[Q_{IR} = .5*f_{scat}*S_{mean}\]
     
     \subsection{Scheme}
 The Crank-Nicholson scheme is used :
 \[ blah \]
 
-The depth chosen is 9 m, which is well below the annual skin depth, defined as the depth at which the annual amplitude of temperature is divided by a factor $e$, and found to be around 3 m. As such we insure a comprehensive portrait of the in-depth temperature profile. The timescale studied here doesn't go as far as a year.
+The depth chosen is 9 m, which is well below the annual skin depth, defined as the depth at which the annual amplitude of temperature is divided by a factor $e$, and found to be little more than 1 m.  As such we insure a comprehensive portrait of the in-depth temperature profile as the timescale studied here doesn't go as far as a year. The diurnal skin depth is 4.8 cm.
 
-Time steps are taken to be half a martian hour (1849 seconds) and regular. The space steps are irregular to save computing time and memory, and depth layers rise with depth. We take 30 layers distributed as follows. 
+Time steps are taken to be half a martian hour (1849 seconds) and regular. The space steps are irregular to save computing time and memory, and layer thickness rise with depth. We take 30 layers (figure \ref{profondef}). 
 
-The convergence is guaranteed if time steps and space steps meet : \[\frac{k dt}{c\rho dz^2}<=0.25\] 
+\begin{figure}
+    \centering
+    \includegraphics{profondef.png}
+    \caption{Depth of each consecutive layer in the model, the tenth layer is marked in red.}
+    \label{profondef}
+\end{figure}{}
+
+The convergence is guaranteed if time steps and space steps meet : \[\frac{k dt}{c\rho dz^2}<=0.25\]
 
 At the bottom layer, we include areothermal energy coming from the core. Estimates range from 19 mW/m$^2$ to 30 mW/m$^2$, given the uncertainties and the challenges in observations.
 
@@ -232,7 +239,7 @@ As the conductivity can span over an order of magnitude, the influence of such c
     \label{diffknewton}
 \end{figure}{}
 
-The temperature evolves through the martian day heavily, from 200 K to 310 K on the warmest day of the year (figure \ref{hourlynewton}). Midday is the hottest hour of the day, with temperature only slightly decreasing through the afternoon and a minimum before sunrise. On the coldest day, the same trend is followed though the temperatures are much lower (40 K difference at the most). \\
+The temperature evolves through the martian day heavily, from 200 K to 310 K on the warmest day of the year (figure \ref{hourlynewton}). Midday is the hottest hour of the day, with temperature slightly decreasing through the afternoon and night, reaching a minimum before sunrise. On the coldest day, the same trend is followed though the temperatures are much lower (40 K difference at the most). \\
 \begin{figure}
     \centering
     \includegraphics[width=0.9\textwidth]{graphs/0108-newton-hourly.png}
@@ -248,7 +255,15 @@ Near the equator, seasonal variations are much lower (figure \ref{hourlygale}), 
     \label{hourlygale}
 \end{figure}{}
 
-A temperature profile documents the behaviour of temperature with respect to the depth -- here up to [] meters at different times of year. 
+In-depth modelled temperature based on constant thermal properties are sustained after sunset in summer (figure \ref{profilenewton}), at 10 cm deep being over 240 K for 12 martian hours straight.  
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{graphs/0208-newton-profile-summer.png}
+    \includegraphics[width=0.5\textwidth]{graphs/0208-newton-profile-winter.png}
+    \caption{Caption}
+    \label{profilenewton}
+\end{figure}{}
+
 Modelling a temperature-dependant conductivity or a conductivity rising with depth. \\
 
 \chapter{Discussion}
